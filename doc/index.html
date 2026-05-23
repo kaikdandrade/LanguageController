@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html> <!-- atributo 'lang' controlado pelo script! -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="title">Default Title Text</title>
+</head>
+
+<body>
+    <h1 data-lang="title">Default Title Text</h1>
+    <h2 data-lang="class">Default 'class' Text</h2>
+    <p>
+        <em data-lang="description">Default Description Text</em>
+    </p>
+    <hr />
+    <!-- data-lang-vars pode ser automátizado com JS -->
+    <p data-lang="copyright" data-lang-vars="[2026]">Default Copyright Text With year variable</p>
+    <hr>
+    <small data-lang="non/existent">Default Error Text</small>
+    <hr>
+    <select name="lang" id="lang-selector" onchange="changeLanguage(event)"></select>
+</body>
+
+<!-- Carrega o script contendo a classe do sistema de internacionalização -->
+<script src="https://cdn.jsdelivr.net/gh/kaikdandrade/LanguageController@main/LanguageController.js"></script>
+
+<!-- Consome os recurso da classe de internacionalização -->
+<script>
+    /**
+     * Criar dicionário que vai carregar os dados das frases em cada idioma.
+     * {var} no texto para incluir valores de variáveis em seu texto.
+     * object.lang é obrigatório!! // Usado para configurar o lang do HTML automáticamente
+     */
+    const DICTIONARY = {
+        languages: {
+            pt: { // Português
+                lang: 'pt-BR',
+                title: 'Demonstração da classe LanguageController',
+                description: 'Sistema de Internacionalização. <br/>Altere o idioma clicando na caixa de seleção e escolhendo uma opção de idioma da lista.',
+                class: 'LanguageController()',
+                copyright: '© {noewYear} LanguageController Demostração. Direitos Reservados.'
+            },
+            en: { // Inglês
+                lang: 'en-US',
+                title: 'LanguageController class demonstration',
+                description: 'Internationalization System. <br/>Change the language by clicking the select box and choosing a language option from the list.',
+                class: 'LanguageController()',
+                copyright: '© {noewYear} LanguageController Demonstration. All Rights Reserved.'
+            },
+            es: { // Espanhol
+                lang: 'es-ES',
+                title: 'Demostración de la clase LanguageController',
+                description: 'Sistema de Internacionalización. <br/>Cambie el idioma haciendo clic en el cuadro de selección y eligiendo una opción de idioma de la lista.',
+                class: 'LanguageController()',
+                copyright: '© {noewYear} Demostración de LanguageController. Todos los derechos reservados.'
+            },
+            fr: { // Francês
+                lang: 'fr-FR',
+                title: 'Démonstration de la classe LanguageController',
+                description: 'Système d\'Internationalisation. <br/>Changez la langue en cliquant sur la liste déroulante et en choisissant une option de langue dans la liste.',
+                class: 'LanguageController()',
+                copyright: '© {noewYear} Démonstration de LanguageController. Tous droits réservés.'
+            },
+            it: { // Italiano
+                lang: 'it-IT',
+                title: 'Dimostrazione della classe LanguageController',
+                description: 'Sistema di Internazionalizzazione. <br/>Cambia la lingua facendo clic sulla casella di selezione e scegliendo un\'opzione di lingua dall\'elenco.',
+                class: 'LanguageController()',
+                copyright: '© {noewYear} Dimostrazione di LanguageController. Tutti i diritti riservati.'
+            },
+        }
+    };
+
+    // Instância o controldor e define o idioma para carregar
+    const language = new LanguageController(DICTIONARY);
+    language.setLanguage('en');
+
+    // Lógica para montar a caixa de seleção automáticamente
+    const options = (value, text, selected) => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.innerHTML = text;
+        option.selected = selected;
+        return option;
+    };
+    const langSelector = document.getElementById('lang-selector');
+    const langs = {
+        html: language.getLanguagesHTML(),
+        normal: language.getLanguages()
+    };
+    langs.normal.forEach((value, i) => {
+        langSelector.appendChild(options(value, langs.html[i], (value === language.getSelectedLanguage())));
+    });
+
+    function changeLanguage(event) {
+        const value = event.target.value;
+        if (language.isValidLanguage(value) && value !== language.getSelectedLanguage())
+            language.setLanguage(value);
+    }
+</script>
+
+</html>
