@@ -193,11 +193,19 @@ class LanguageController {
     }
 
     /**
-     * Obtém o código da linguagem atualmente selecionada.
+     * Obtém o código da linguagem atualmente selecionada
      * @returns {string} Código da linguagem (ex: 'pt', 'en', 'es')
      */
     getCurrentLanguage() {
         return this.#selectedLanguage;
+    }
+
+     /**
+     * Obtém o código HTML da linguagem atualmente selecionada
+     * @returns {string} Código da linguagem (ex: 'pt-BR', 'en-US')
+     */
+    getCurrentLanguageHTML() {
+        return this.#dict.languages[this.#selectedLanguage].lang;
     }
 
     /**
