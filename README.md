@@ -81,7 +81,7 @@ Adicione o atributo correspondente (`data-lang`) com o caminho da chave do dicio
 
 **2. Carregue o script do *LanguageController*:**
 ```html
-<script src="[https://cdn.jsdelivr.net/gh/kaikdandrade/LanguageController@main/LanguageController.js](https://cdn.jsdelivr.net/gh/kaikdandrade/LanguageController@main/LanguageController.js)"></script>
+<script src="https://cdn.jsdelivr.net/gh/kaikdandrade/LanguageController@main/LanguageController.js"></script>
 ```
 
 **3. No JavaScript (Instanciando e Aplicando)**
