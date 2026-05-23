@@ -81,7 +81,7 @@ class LanguageController {
      */
     constructor(dictionary = {}) {
         if (!Object.hasOwn(dictionary, 'languages'))
-            throw new Error("LanguageController Error: 'config' nor found in the dictionary.");
+            throw new Error("LanguageController Error: 'languages' not found in the dictionary.");
 
         this.#dict = dictionary.languages;
         this.#config.separator = dictionary?.config?.separator || '/';
