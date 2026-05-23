@@ -205,7 +205,7 @@ class LanguageController {
      * @returns {string} Código da linguagem (ex: 'pt-BR', 'en-US')
      */
     getCurrentLanguageHTML() {
-        return this.#dict.languages[this.#selectedLanguage].lang;
+        return this.#dict[this.#selectedLanguage].lang;
     }
 
     /**
